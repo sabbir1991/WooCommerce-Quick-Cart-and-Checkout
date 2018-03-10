@@ -165,6 +165,7 @@ class Woo_Quick_Cart_Checkout {
         // Loads frontend scripts and styles
         add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
         add_action( 'admin_enqueue_scripts', array( $this, 'admin_enqueue_scripts' ) );
+        add_action( 'wp_footer', array( $this, 'load_template' ), 10 );
     }
 
     /**
@@ -210,6 +211,49 @@ class Woo_Quick_Cart_Checkout {
          */
         // $translation_array = array( 'some_string' => __( 'Some string to translate', 'baseplugin' ), 'a_value' => '10' );
         // wp_localize_script( 'base-plugin-scripts', 'baseplugin', $translation_array ) );
+    }
+
+    /**
+     * Load template
+     *
+     * @since 1.0.0
+     *
+     * @return void
+     */
+    public function load_template() {
+        ?>
+        <div class="cd-cart-container">
+            <a href="#0" class="cd-cart-trigger">
+                Cart
+                <ul class="count"> <!-- cart items count -->
+                    <li>0</li>
+                    <li>0</li>
+                </ul> <!-- .count -->
+            </a>
+
+            <div class="cd-cart">
+                <div class="wrapper">
+                    <header>
+                        <h2>Cart</h2>
+                        <span class="undo">Item removed. <a href="#0">Undo</a></span>
+                    </header>
+
+                    <div class="body">
+
+                        <ul>
+                            <?php foreach ( WC()->cart->get_cart_contents() as $key => $cart_item ): ?>
+
+                            <?php endforeach ?>
+                        </ul>
+                    </div>
+
+                    <footer>
+                        <a href="#0" class="checkout btn"><em>Checkout - $<span>0</span></em></a>
+                    </footer>
+                </div>
+            </div> <!-- .cd-cart -->
+        </div> <!-- cd-cart-container -->
+        <?php
     }
 
     /**
