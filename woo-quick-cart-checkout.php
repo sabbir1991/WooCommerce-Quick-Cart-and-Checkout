@@ -6,6 +6,10 @@ Description: Instant cart and checkout for customers
 Version: 1.0.0
 Author: Sabbir Ahmed
 Author URI: http://sabbir.pro/
+Text Domain: woo-quick-cart-checkout
+WC requires at least: 3.0
+WC tested up to: 3.5.2
+Domain Path: /languages/
 License: GPL2
 */
 
@@ -43,7 +47,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  *
  * @class Woo_Quick_Cart_Checkout The class that holds the entire Woo_Quick_Cart_Checkout plugin
  */
-final Woo_Quick_Cart_Checkout {
+final class Woo_Quick_Cart_Checkout {
 
      /**
      * Plugin version
@@ -158,9 +162,8 @@ final Woo_Quick_Cart_Checkout {
     * @return void
     **/
     private function init_hooks() {
-        // Localize our plugin
-        add_action( 'init', array( $this, 'localization_setup' ) );
-        add_action( 'init', array( $this, 'init_classes' ) );
+        add_action( 'init', [ $this, 'localization_setup' ] );
+        add_action( 'init', [ $this, 'init_classes' ] );
     }
 
     /**
@@ -170,7 +173,7 @@ final Woo_Quick_Cart_Checkout {
     *
     * @return void
     **/
-    private function init_classes() {
+    public function init_classes() {
 
     }
 
